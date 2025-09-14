@@ -40,18 +40,18 @@ const options = [
 export default function AgeStep({ uid }) {
   const navigate = useNavigate();
   const [selected, setSelected] = React.useState(null);
+
   const handleSelect = async (value) => {
     setSelected(value);
     await saveProfileStep(uid, "age_group", value);
     setTimeout(() => navigate("/profile-marital"), 400);
   };
+
   return (
     <div className={styles.stepContainer}>
       <ProfileProgressBar step={1} />
-      <h2 style={{ fontSize: 36, fontWeight: 800, margin: "32px 0 8px 0" }}>
-        Tell us about your age group
-      </h2>
-      <p style={{ fontSize: 18, color: "#444", marginBottom: 32 }}>
+      <h2 className={styles.stepTitle}>Tell us about your age group</h2>
+      <p className={styles.stepText}>
         This helps us understand your investment timeline and customize the
         perfect strategy for you.
       </p>
@@ -59,22 +59,10 @@ export default function AgeStep({ uid }) {
         {options.map((opt) => (
           <div
             key={opt.value}
-            className={
-              styles.optionCard +
-              (selected === opt.value ? " " + styles.selected : "")
-            }
+            className={`${styles.optionCard} ${selected === opt.value ? styles.selected : ""}`}
             onClick={() => handleSelect(opt.value)}
           >
-            <img
-              src={opt.img}
-              alt=""
-              style={{
-                width: 120,
-                height: 120,
-                borderRadius: 16,
-                objectFit: "cover",
-              }}
-            />
+            <img src={opt.img} alt={opt.label} className={styles.optionImg} />
             <div className={styles.optionLabel}>{opt.label}</div>
             <div className={styles.optionSubtitle}>{opt.subtitle}</div>
           </div>

@@ -26,7 +26,6 @@ const JourneySteps = () => {
   const containerRef = useRef();
   const timerRef = useRef();
 
-  // Helper to check if section is in viewport
   const isInViewport = () => {
     if (!containerRef.current) return false;
     const rect = containerRef.current.getBoundingClientRect();
@@ -38,7 +37,7 @@ const JourneySteps = () => {
       setVisible(isInViewport());
     };
     window.addEventListener("scroll", onScroll);
-    onScroll(); // Initial check
+    onScroll();
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
@@ -58,77 +57,31 @@ const JourneySteps = () => {
 
   return (
     <div className={styles.journeyContainer} ref={containerRef}>
-      {/* Progress bar section */}
-      <div className={styles.progressBar} style={{ position: "relative" }}>
+      <div className={styles.progressBar}>
         <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: delayedVisible ? "100%" : "0%",
-            background: "linear-gradient(90deg, #b6e388 0%, #ff7f50 100%)",
-            borderRadius: "9px",
-            zIndex: 0,
-            transition: "width 0.7s cubic-bezier(.4,0,.2,1)",
-          }}
+          className={delayedVisible ? styles.progressFill : ""}
         />
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
             className={styles.stepCircle}
-            style={{ left: `${(i / (steps.length - 1)) * 100}%`, zIndex: 10 }}
+            style={{ left: `${(i / (steps.length - 1)) * 100}%` }}
           >
             {i + 1}
           </div>
         ))}
       </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          width: "80vw",
-          maxWidth: "1100px",
-          margin: "32px auto 0 auto",
-          gap: "32px",
-          textAlign: "left",
-        }}
-      >
+
+      <div className={styles.stepsGrid}>
         {steps.map((step, i) => (
-          <div key={i}>
-            <div
-              className={delayedVisible ? styles.flyIn : styles.flyOut}
-              style={{
-                fontSize: "7rem",
-                fontWeight: 800,
-                color: "#99f468ff",
-                opacity: 0.35,
-                marginBottom: "18px", // increased gap below number
-                lineHeight: 1,
-              }}
-            >
+          <div key={i} className={styles.stepCard}>
+            <div className={`${styles.stepNumber} ${delayedVisible ? styles.flyIn : styles.flyOut}`}>
               {i + 1}
             </div>
-            <div
-              className={delayedVisible ? styles.flyIn : styles.flyOut}
-              style={{
-                fontSize: "2rem",
-                fontWeight: 700,
-                color: "#222",
-                marginBottom: "10px",
-                marginTop: "12px", // gap above bold text
-              }}
-            >
+            <div className={`${styles.stepTitle} ${delayedVisible ? styles.flyIn : styles.flyOut}`}>
               {step.title}
             </div>
-            <div
-              className={delayedVisible ? styles.flyIn : styles.flyOut}
-              style={{
-                fontSize: "1.15rem",
-                color: "#444",
-                marginTop: "8px", // gap above description
-              }}
-            >
+            <div className={`${styles.stepDesc} ${delayedVisible ? styles.flyIn : styles.flyOut}`}>
               {step.desc}
             </div>
           </div>

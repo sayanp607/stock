@@ -5,22 +5,22 @@ const faqs = [
   {
     question: "Why Choose BearTron Over Mutual Funds or Smallcases?",
     answer:
-      "Smallcases and mutual funds provide pre-packaged investment strategies, but BearTron  goes above and beyond by building customised portfolios that fit your unique goals, time horizons, and risk tolerance. Instead of adopting a one-size-fits-all strategy, we create dynamic, goal-specific investment plans that readily adjust to your evolving needs. In short, your goals are our mandate.",
+      "Unlike Mutual Funds or Smallcases, BearTron gives beginners transparent, AI-driven and personalized stock insights with full control of their investments."
   },
   {
     question: "Who Designs These Portfolios?",
     answer:
-      "Our committed investment team, headed by Karan Shah, a CFA and FRM with over 14 years of experience at prestigious firms like BlackRock, LGT India, and TrustPlutus, creates your portfolios. Supported by a group of professionals, we combine in-depth knowledge of your goals with rigorous analysis. Additionally, our in-house data-driven system helps to maintain your portfolios in line with your objectives.",
+      "Our portfolios are crafted using SEBI-registered analysts’ research.AI predictions personalize them to each user’s goals and risk profile.This fusion of human expertise and technology ensures smarter investing.",
   },
   {
     question: "Why Might My Goal Risk Differ from My Overall Risk Profile?",
     answer:
-      "Each goal has a unique timeframe and priority. You might be more comfortable taking risks for long-term goals like retirement but prefer a conservative approach for short-term goals like a home down payment. Our goal optimization tool balances these nuances to ensure you’re always investing in a way that feels right for you.",
+      "Your overall risk profile reflects your general ability to take risk (age, income, financial situation).But each financial goal (like buying a house vs. short-term trading) may need a different level of risk.That’s why your goal-specific risk can differ from your overall profile.",
   },
   {
-    question: "How Does BearTron  Support My Financial Journey?",
+    question: "How Does BearTron Support My Financial Journey?",
     answer:
-      "Consider us your personal travel advisor; we don't merely provide you with a generic itinerary; instead, we design a unique trip based on your preferences. Your financial well-being is always at the forefront of our dynamic, goal-driven strategies, which change as your life does.",
+      "BearTron creates personalized portfolios aligned with your goals and risk appetite.It combines SEBI-registered analysts’ expertise with AI insights for smarter decisions.With continuous monitoring and timely alerts, it guides you at every step of your investing journey.",
   },
 ];
 
@@ -31,7 +31,6 @@ export default function FAQSection() {
   const containerRef = useRef();
   const timerRef = useRef();
 
-  // Helper to check if section is in viewport
   const isInViewport = () => {
     if (!containerRef.current) return false;
     const rect = containerRef.current.getBoundingClientRect();
@@ -43,7 +42,7 @@ export default function FAQSection() {
       setVisible(isInViewport());
     };
     window.addEventListener("scroll", onScroll);
-    onScroll(); // Initial check
+    onScroll();
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
@@ -72,8 +71,7 @@ export default function FAQSection() {
   return (
     <div className={styles.faqContainer} ref={containerRef}>
       <div className={styles.faqTitle}>
-        Have Questions?{" "}
-        <span className={styles.highlight}>We’ve got the answers</span>
+        Have Questions? <span className={styles.highlight}>We’ve got the answers</span>
       </div>
       <div className={styles.faqList}>
         {faqs.map((faq, i) => (
@@ -86,9 +84,7 @@ export default function FAQSection() {
           >
             <div className={styles.faqQuestion} onClick={() => handleToggle(i)}>
               {faq.question}
-              <span
-                style={{ fontSize: "2rem", fontWeight: 700, marginLeft: 18 }}
-              >
+              <span className={styles.faqToggle}>
                 {openIdx === i ? "−" : "+"}
               </span>
             </div>

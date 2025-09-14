@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { API_BASE_URL } from "./main";
+import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -53,87 +54,29 @@ const ContactForm = () => {
   };
 
   return (
-    <section
-      style={{
-        background: "linear-gradient(#c6e6a6 100%)",
-        padding: "64px 0",
-        width: "100%",
-        minHeight: 420,
-        marginTop:50,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <section className={styles.contactSection}>
       <div
+        className={`${styles.contactWrapper} ${
+          visible ? styles.flyIn : styles.flyOut
+        }`}
         ref={formRef}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "60px",
-          boxSizing: "border-box",  // Added to ensure consistent sizing
-        }}
       >
-        {/* Animation on the Left Side */}
-        <div
-          style={{
-            maxWidth: 300,
-            width: "100%",
-            boxSizing: "border-box",
-            animation: visible
-              ? "flyIn 1s ease-out forwards"
-              : "flyOut 0.7s ease-in forwards",
-            opacity: visible ? 1 : 0,
-          }}
-        >
+        <div className={styles.animationContainer}>
           <DotLottieReact
             src="https://lottie.host/419d3a20-93e5-47c7-ac5f-0d5ea5524d5c/Nve30W1b9E.lottie"
             loop
             autoplay
-            style={{
-              width: "100%",
-              maxWidth: 300,
-              height: 300,
-              margin: "0 auto",
-              boxSizing: "border-box",
-            }}
+            className={styles.animation}
           />
         </div>
 
-        {/* Contact Form */}
         <form
           onSubmit={handleSubmit}
-          style={{
-            background: "#e07039ff",
-            borderRadius: 18,
-            boxShadow: "0 8px 30px rgba(0,0,0,0.10)",
-            padding: "38px 32px",
-            maxWidth: 480,
-            width: 480, // Set fixed width to avoid layout jumps
-            boxSizing: "border-box", // Ensure consistent sizing
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            position: "relative",
-            zIndex: 2,
-            animation: visible
-              ? "flyIn 1s ease-out forwards"
-              : "flyOut 0.7s ease-in forwards",
-            opacity: visible ? 1 : 0,
-          }}
+          className={`${styles.contactForm} ${
+            visible ? styles.flyIn : styles.flyOut
+          }`}
         >
-          <h2
-            style={{
-              fontWeight: 800,
-              fontSize: "2rem",
-              color: "#000000ff",
-              marginBottom: 18,
-              letterSpacing: 1,
-            }}
-          >
-            Contact Us
-          </h2>
+          <h2 className={styles.formTitle}>Contact Us</h2>
           <input
             type="text"
             name="name"
@@ -141,16 +84,7 @@ const ContactForm = () => {
             value={form.name}
             onChange={handleChange}
             required
-            style={{
-              width: "100%",
-              padding: "12px 16px",
-              marginBottom: 16,
-              borderRadius: 8,
-              border: "1.5px solid #dbeafe",
-              fontSize: "1.08rem",
-              background: "#f6f8ff",
-              boxSizing: "border-box",
-            }}
+            className={styles.inputField}
           />
           <input
             type="email"
@@ -159,16 +93,7 @@ const ContactForm = () => {
             value={form.email}
             onChange={handleChange}
             required
-            style={{
-              width: "100%",
-              padding: "12px 16px",
-              marginBottom: 16,
-              borderRadius: 8,
-              border: "1.5px solid #dbeafe",
-              fontSize: "1.08rem",
-              background: "#f6f8ff",
-              boxSizing: "border-box",
-            }}
+            className={styles.inputField}
           />
           <textarea
             name="message"
@@ -177,89 +102,30 @@ const ContactForm = () => {
             onChange={handleChange}
             required
             rows={5}
-            style={{
-              width: "100%",
-              padding: "12px 16px",
-              marginBottom: 18,
-              borderRadius: 8,
-              border: "1.5px solid #dbeafe",
-              fontSize: "1.08rem",
-              background: "#f6f8ff",
-              resize: "none",
-              boxSizing: "border-box",
-            }}
+            className={styles.textareaField}
           />
           {success ? (
-            <div
-              style={{
-                marginTop: 8,
-                fontWeight: 600,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "100%",
-                boxSizing: "border-box",
-              }}
-            >
+            <div className={styles.successContainer}>
               <DotLottieReact
                 src="https://lottie.host/8818647d-0d97-471d-8322-59a40d8be82c/H27XYZ52Hx.lottie"
                 loop={false}
                 autoplay
-                style={{
-                  width: "100%",
-                  maxWidth: 250,
-                  height: 100,
-                  margin: "0 auto",
-                  boxSizing: "border-box",
-                }}
+                className={styles.successAnimation}
               />
-              <span
-                style={{ color: "#22c55e", fontSize: "1.15rem", marginTop: 8 }}
-              >
-                {success}
-              </span>
+              <span className={styles.successText}>{success}</span>
             </div>
           ) : (
             <button
               type="submit"
               disabled={loading}
-              style={{
-                background: "#000",
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: "1.15rem",
-                border: "none",
-                borderRadius: 10,
-                padding: "14px 32px",
-                cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                transition: "background 0.2s",
-                marginTop: 8,
-                width: "100%",
-                boxSizing: "border-box",
-              }}
+              className={styles.submitButton}
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
           )}
-          {error && (
-            <div style={{ color: "#ef4444", marginTop: 16, fontWeight: 600 }}>
-              {error}
-            </div>
-          )}
+          {error && <div className={styles.errorText}>{error}</div>}
         </form>
       </div>
-
-      <style>{`
-        @keyframes flyIn {
-          from { transform: translateY(50px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes flyOut {
-          from { transform: translateY(0); opacity: 1; }
-          to { transform: translateY(50px); opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 };

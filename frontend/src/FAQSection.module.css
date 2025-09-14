@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1100px;
   margin: 64px auto 0 auto;
-  padding: 0 16px;
+  padding: 0 16px; /* Equal left-right padding for all screens */
 }
 
 .faqTitle {
@@ -12,6 +12,7 @@
   margin-bottom: 40px;
   color: #222;
 }
+
 .faqTitle .highlight {
   color: #ff7f50;
 }
@@ -20,6 +21,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
 }
 
 .faqItem {
@@ -27,10 +29,13 @@
   border-radius: 28px;
   box-shadow: 0 4px 24px rgba(44,62,80,0.08);
   border: 1.5px solid #eaeaea;
-  padding: 0;
   overflow: hidden;
   transition: box-shadow 0.2s;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto; /* centers the item horizontally */
 }
+
 .faqItem.open {
   box-shadow: 0 8px 32px rgba(44,62,80,0.18);
   border-color: #ff7f50;
@@ -40,7 +45,7 @@
   font-size: 1.35rem;
   font-weight: 600;
   color: #222;
-  padding: 32px 32px 32px 32px;
+  padding: 32px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -49,8 +54,15 @@
   background: #b6e388;
   border-radius: 28px;
 }
+
 .faqQuestion:hover {
   background: #d6f5b0;
+}
+
+.faqToggle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-left: 18px;
 }
 
 .faqAnswer {
@@ -70,8 +82,46 @@
   transform: translateY(0) !important;
   transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
 }
+
 .flyOut {
   opacity: 0 !important;
   transform: translateY(40px) !important;
   transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .faqContainer {
+    margin: 32px auto 0 auto;
+    padding: 0 16px; /* Keep equal left-right spacing */
+  }
+
+  .faqTitle {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+
+  .faqList {
+    width: 92%;
+  }
+
+  .faqItem {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .faqQuestion {
+    font-size: 1rem;
+    padding: 20px;
+  }
+
+  .faqToggle {
+    font-size: 1.5rem;
+    margin-left: 12px;
+  }
+
+  .faqAnswer {
+    font-size: 0.9rem;
+    padding: 0 20px 20px 20px;
+  }
 }

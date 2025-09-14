@@ -34,18 +34,33 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
     else scrollToSection(section);
   };
 
+  // New handler for Register button
+  const handleRegister = () => {
+    closeMenu();
+    setTimeout(() => {
+      onRegisterClick();
+    }, 200); // slight delay to ensure menu closes first
+  };
+
+  // New handler for Logout button
+  const handleLogout = () => {
+    closeMenu();
+    setTimeout(() => {
+      onLogout();
+    }, 200);
+  };
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.logo} onClick={() => scrollToSection("top")}>
-  <img
-    src="/logo.jpg"  // replace with your logo path or URL
-    alt="BearTron Logo"
-    className={styles.logoImg}
-  />
-  <span>BearTron</span>
-</div>
-
+          <img
+            src="/logo.jpg" // replace with your logo path or URL
+            alt="BearTron Logo"
+            className={styles.logoImg}
+          />
+          <span>BearTron</span>
+        </div>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ""}`}>
           <button className={styles.navLink} onClick={() => handleLinkClick("home")}>
@@ -62,12 +77,12 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
           </button>
 
           {!currentUser && (
-            <button className={styles.navBtn} onClick={onRegisterClick}>
+            <button className={styles.navBtn} onClick={handleRegister}>
               Register
             </button>
           )}
           {currentUser && (
-            <button className={styles.navBtn} onClick={onLogout}>
+            <button className={styles.navBtn} onClick={handleLogout}>
               Logout
             </button>
           )}
@@ -79,7 +94,6 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
           <div className={styles.bar}></div>
         </div>
 
-        {/* Overlay */}
         {isMenuOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
       </header>
 

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../main";
+import styles from "./Dashboard.module.css";
+
+// investorTypes, scoreMaps, getInvestorType remain unchanged here...
 
 // Investor type metadata for the result screen
 const investorTypes = [
@@ -150,16 +153,13 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Intercept back navigation
   useEffect(() => {
     const handlePopState = () => {
       setShowConfirm(true);
       window.history.pushState(null, "", window.location.href);
     };
-
     window.history.pushState(null, "", window.location.href);
     window.addEventListener("popstate", handlePopState);
-
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
@@ -169,40 +169,32 @@ export default function Dashboard() {
     if (confirm) {
       setShowConfirm(false);
       window.removeEventListener("popstate", () => {});
-      navigate("/profile-age"); // Redirect user if confirmed
+      navigate("/profile-age");
     } else {
       setShowConfirm(false);
     }
   };
 
   if (loading) {
-    return (
-      <div style={{ textAlign: "center", marginTop: 80, fontSize: "1.25rem" }}>
-        Loading your personalized investment profile...
-      </div>
-    );
+    return <div className={styles.loading}>Loading your personalized investment profile...</div>;
   }
 
   if (!profile || !profile.age_group) {
-    return (
-      <div style={{ textAlign: "center", marginTop: 80, fontSize: "1.25rem" }}>
-        No profile data found. Please complete your profile steps first.
-      </div>
-    );
+    return <div className={styles.loading}>No profile data found. Please complete your profile steps first.</div>;
   }
 
   const type = investorTypes[typeIdx];
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 16px", position: "relative" }}>
-      <h1 style={{ textAlign: "center", fontWeight: 800, fontSize: "2.6rem" }}>
-        Congratulations! You're a <span style={{ color: "#ff4d4f" }}>{type.label}</span> Investor
+    <div className={styles.dashboardContainer}>
+      <h1 className={styles.mainTitle}>
+        Congratulations! You're a <span className={styles.highlight}>{type.label}</span> Investor
       </h1>
-      <div style={{ textAlign: "center", marginBottom: 18, fontSize: "1.1rem" }}>
+      <div className={styles.subtitle}>
         We've analyzed your responses and created your personalized investment profile
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 600, margin: "18px 6px 6px" }}>
+      <div className={styles.scoreLabels}>
         <span>Conservative</span>
         <span>Moderately Conservative</span>
         <span>Moderate</span>
@@ -210,103 +202,40 @@ export default function Dashboard() {
         <span>Aggressive</span>
       </div>
 
-      <div style={{ position: "relative", height: 16, borderRadius: 10, background: "#eef1f4" }}>
+      <div className={styles.progressBar}>
         <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: `${((typeIdx + 1) / 5) * 100}%`,
-            borderRadius: 10,
-            background: "linear-gradient(90deg, #4ecb71 0%, #b6e388 20%, #ffc94d 40%, #ff9f43 60%, #ff4d4f 100%)",
-            transition: "width 600ms cubic-bezier(.4,0,.2,1)",
-          }}
+          className={styles.progressFill}
+          style={{ width: `${((typeIdx + 1) / 5) * 100}%` }}
         />
         {[0, 1, 2, 3, 4].map((i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              left: `${(i / 4) * 100}%`,
-              top: -6,
-              width: 18,
-              height: 18,
-              borderRadius: "50%",
-              background: "#fff",
-              border: "3px solid #fff",
-              boxShadow: "0 0 0 2px rgba(0,0,0,0.12)",
-              transform: "translateX(-50%)",
-              zIndex: 2,
-            }}
-          />
+          <div key={i} className={styles.progressMarker} style={{ left: `${(i / 4) * 100}%` }} />
         ))}
       </div>
 
-      <div style={{ background: "#fff", borderRadius: 18, boxShadow: "0 8px 30px rgba(0,0,0,0.06)", marginTop: 28, padding: "28px 22px", textAlign: "center" }}>
-        <h2 style={{ fontWeight: 700, fontSize: "1.9rem", marginBottom: 16 }}>What This Means For You</h2>
-        <div style={{ fontSize: "1.1rem", marginBottom: 26, lineHeight: 1.6 }}>{type.desc}</div>
-
-        <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
+      <div className={styles.resultBox}>
+        <h2 className={styles.resultTitle}>What This Means For You</h2>
+        <div className={styles.resultDesc}>{type.desc}</div>
+        <div className={styles.metricsContainer}>
           {type.metrics.map((m, idx) => (
-            <div key={m.name} style={{ background: "#f6ffed", borderRadius: 14, padding: "20px 26px", minWidth: 220, textAlign: "center", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}>
-              <div style={{ fontSize: "2rem", marginBottom: 6 }}>{idx === 0 ? "📊" : idx === 1 ? "💰" : "🛡️"}</div>
-              <div style={{ fontWeight: 700, fontSize: "1.1rem" }}>{m.name}</div>
-              <div style={{ marginTop: 6, color: "#1a7f37" }}>Level: {m.level}</div>
+            <div key={m.name} className={styles.metricCard}>
+              <div className={styles.metricIcon}>{idx === 0 ? "📊" : idx === 1 ? "💰" : "🛡️"}</div>
+              <div className={styles.metricName}>{m.name}</div>
+              <div className={styles.metricLevel}>Level: {m.level}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Confirmation Modal */}
       {showConfirm && (
-        <div style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(0,0,0,0.5)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 1000,
-        }}>
-          <div style={{
-            background: "#fff",
-            padding: "24px 32px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-            maxWidth: 400,
-            textAlign: "center",
-          }}>
-            <h2 style={{ marginBottom: 16, fontSize: "1.5rem", fontWeight: 700 }}>Confirm Navigation</h2>
-            <p style={{ marginBottom: 24 }}>Do you want to build your profile from scratch again?</p>
-            <div style={{ display: "flex", justifyContent: "center", gap: "12px" }}>
-              <button
-                onClick={() => confirmNavigation(true)}
-                style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#ff4d4f",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontWeight: 600,
-                }}
-              >
+        <div className={styles.modalBackdrop}>
+          <div className={styles.modalContent}>
+            <h2>Confirm Navigation</h2>
+            <p>Do you want to build your profile from scratch again?</p>
+            <div className={styles.modalButtons}>
+              <button className={styles.confirmBtn} onClick={() => confirmNavigation(true)}>
                 Yes
               </button>
-              <button
-                onClick={() => confirmNavigation(false)}
-                style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#f0f0f0",
-                  color: "#333",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontWeight: 600,
-                }}
-              >
+              <button className={styles.cancelBtn} onClick={() => confirmNavigation(false)}>
                 No
               </button>
             </div>

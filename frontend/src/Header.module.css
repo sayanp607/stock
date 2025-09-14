@@ -17,27 +17,26 @@
   cursor: pointer;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.logoImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+}
+
 .nav {
   display: flex;
   align-items: center;
   gap: 24px;
   transition: right 0.3s ease-in-out;
 }
-
-.logo {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  cursor: pointer;
-  gap: 12px; /* space between logo and text */
-}
-
-.logoImg {
-  width: 60px;   /* adjust size as needed */
-  height: 60px;  /* adjust size as needed */
-  border-radius: 20px;
-}
-
 
 .navLink {
   background: none;
@@ -96,10 +95,10 @@
     width: 250px;
     height: 100vh;
     flex-direction: column;
-    background: linear-gradient(120deg, #ff7f50, #c6e6a6);
+    background: linear-gradient(120deg, #c6e6a6, #c6e6a6);
     padding: 64px 16px;
     gap: 24px;
-    z-index: 3000; /* above overlay */
+    z-index: 3000;
     transition: right 0.3s ease-in-out;
   }
 
@@ -115,19 +114,31 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 2500; /* below nav */
+    z-index: 2500;
   }
 
   .navLink,
   .navBtn {
     width: 100%;
-    text-align: left;
+    text-align: center;
+    text-decoration: underline;
     font-size: 1.2rem;
-    color: #fff;
+    font-weight: bolder;
+    color: #ff7f50;
+  }
+
+  /* Override navBtn styling for mobile to ensure contrast */
+  .navBtn {
+    background: #fff;
+    color: #ff7f50;
+  }
+
+  .navBtn:hover {
+    background: #ffe5d0;
   }
 }
 
-/* Alert */
+/* Alert Styling */
 .alert {
   position: fixed;
   top: 20px;
@@ -149,3 +160,4 @@
   0% { transform: translate(-50%, -50px); opacity: 0; }
   100% { transform: translate(-50%, 0); opacity: 1; }
 }
+

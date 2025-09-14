@@ -73,19 +73,6 @@
   margin-bottom: 40px;
 }
 
-@media (max-width: 600px) {
-  .topBar {
-    padding: 16px 8px 0 0;
-    gap: 8px;
-  }
-  .welcomeTitle {
-    font-size: 1.3rem;
-  }
-  .welcomeText {
-    font-size: 1rem;
-  }
-}
-
 .modalBackdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -94,4 +81,171 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modalBox {
+  background: #232526;
+  border-radius: 16px;
+  padding: 32px;
+  min-width: 350px;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.32);
+}
+
+/* Call-to-action styles */
+.callToAction {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px 0 32px 0;
+}
+
+.callToActionBox {
+  background: linear-gradient(90deg, #3b5cff 0%, #4666e5 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  padding: 32px 38px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.callIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #4e7cfb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.callIcon span {
+  font-size: 44px;
+  color: #fff;
+}
+
+.callContent {
+  flex: 1;
+}
+
+.callTitle {
+  font-weight: 800;
+  font-size: 2.1rem;
+  color: #fff;
+}
+
+.callText {
+  color: #e6eaff;
+  font-size: 1.18rem;
+  margin-top: 6px;
+}
+
+.callButton {
+  background: #fff;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 1.15rem;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 32px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background 0.2s;
+}
+.callButton:hover {
+  background: #f0f0f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .callToActionBox {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
+    gap: 20px;
+    width: 80%;
+  }
+
+  .callIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .callIcon span {
+    font-size: 36px;
+  }
+
+  .callTitle {
+    font-size: 1.5rem;
+  }
+
+  .callText {
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+
+  .callButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .callIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .callIcon span {
+    font-size: 28px;
+  }
+
+  .callTitle {
+    font-size: 1.3rem;
+  }
+
+  .callText {
+    font-size: 0.9rem;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .topBar {
+    padding: 16px 8px 0 0;
+    gap: 8px;
+  }
+
+  .logoutBtn,
+  .checkUsersBtn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .welcomeTitle {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .welcomeText {
+    font-size: 0.95rem;
+    max-width: 90%;
+    margin-bottom: 24px;
+  }
+
+  .modalBox {
+    width: 90%;
+    max-width: 300px;
+    padding: 20px;
+  }
 }

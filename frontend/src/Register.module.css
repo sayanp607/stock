@@ -40,16 +40,27 @@
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .googleButton:hover {
   background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
 }
 
+/* Mobile Styles */
 @media (max-width: 600px) {
   .registerBox {
-    min-width: 90vw;
-    padding: 24px 8px;
+    min-width: 0 !important;   /* Override fixed min width */
+    max-width: 70% !important;  /* Responsive width */
+    width: 90% !important;
+    padding: 20px 16px;
   }
+
   .registerTitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .googleButton {
+    padding: 10px 0;
+    font-size: 1rem;
   }
 }

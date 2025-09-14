@@ -25,7 +25,7 @@
   font-weight: 500;
   color: #444;
   margin-bottom: 18px;
-  box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
   display: inline-block;
 }
 
@@ -36,6 +36,11 @@
   margin-bottom: 12px;
   line-height: 1.1;
   gap: 10px;
+}
+
+.heroSpacer {
+  display: block;
+  height: 50px;
 }
 
 .heroHighlight {
@@ -50,7 +55,7 @@
 }
 
 .diceRotate {
-  animation: diceRotateAnim 0.6s cubic-bezier(.4,0,.2,1);
+  animation: diceRotateAnim 0.6s cubic-bezier(.4, 0, .2, 1);
 }
 
 @keyframes diceRotateAnim {
@@ -87,17 +92,23 @@
   font-weight: 700;
   font-size: 1.1rem;
   padding: 16px 32px;
-  box-shadow: 0 2px 8px rgba(44,62,80,0.18);
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .heroBtn:hover {
   background: #ff7f50;
   color: #fff;
   transform: scale(1.05);
+}
+
+.arrow {
+  font-size: 1.5em;
+  margin-left: 2px;
 }
 
 .heroRight {
@@ -108,20 +119,144 @@
   min-width: 320px;
 }
 
+.lottieAnimation {
+  width: 340px;
+  height: 340px;
+}
+
+/* Custom alert styling */
+.customAlert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #ff7f50, #ff4d4f);
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  text-align: center;
+  animation: slideDown 0.5s ease-out;
+}
+
+/* Responsive styles */
 @media (max-width: 900px) {
   .heroContainer {
     flex-direction: column;
-    padding: 32px 0 24px 0;
+    padding: 32px 20px 24px 20px;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically if needed */
   }
+
   .heroLeft {
-    padding-left: 0;
-    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0; /* Remove left padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center;
+    text-align: center; /* Center text */
+  }
+
+  .heroTagline,
+  .heroTitle,
+  .heroDesc,
+  .heroBtn {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 600px; /* Optional: limit max width */
   }
-  .heroRight {
-    margin-top: 24px;
-  }
+
   .heroTitle {
     font-size: 2.1rem;
+  }
+
+  .heroTagline {
+    font-size: 1rem;
+    padding: 6px 16px;
+  }
+
+  .heroDesc {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .heroBtn {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+
+  .heroRight {
+    margin-top: 24px;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .lottieAnimation {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContainer {
+    padding: 24px 12px 20px 12px;
+  }
+
+  .heroLeft {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center;
+    text-align: center; /* Center text */
+  }
+
+  .heroTagline,
+  .heroTitle,
+  .heroDesc,
+  .heroBtn {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 400px; /* Optional max width */
+  }
+
+  .heroTitle {
+    font-size: 1.75rem;
+  }
+
+  .heroTagline {
+    font-size: 0.9rem;
+    padding: 5px 12px;
+  }
+
+  .heroDesc {
+    font-size: 0.95rem;
+  }
+
+  .heroBtn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+
+  .heroRight {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 20px;
+  }
+
+  .lottieAnimation {
+    width: 200px;
+    height: 200px;
   }
 }

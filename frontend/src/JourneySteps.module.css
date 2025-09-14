@@ -1,14 +1,3 @@
-/* Fly-in animation for step text */
-.flyIn {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
-}
-.flyOut {
-  opacity: 0 !important;
-  transform: translateY(40px) !important;
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
-}
 .journeyContainer {
   margin-top: 48px;
   display: flex;
@@ -16,6 +5,7 @@
   align-items: center;
 }
 
+/* Progress Bar */
 .progressBar {
   width: 80vw;
   max-width: 1100px;
@@ -28,6 +18,21 @@
   align-items: center;
 }
 
+
+
+.progressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #b6e388 0%, #ff7f50 100%);
+  border-radius: 9px;
+  transition: width 0.7s cubic-bezier(.4, 0, .2, 1);
+  z-index: 0;
+}
+
+/* Step Circles */
 .stepCircle {
   position: absolute;
   top: 50%;
@@ -44,8 +49,10 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+  z-index: 10;
 }
 
+/* Steps Grid */
 .stepsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -53,8 +60,10 @@
   width: 80vw;
   max-width: 1100px;
   margin-top: 32px;
+  text-align: left;
 }
 
+/* Individual Step Card */
 .stepCard {
   background: none;
   position: relative;
@@ -63,55 +72,99 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  opacity: 0;
-  transform: translateY(40px);
+}
+
+/* Fly-in / Fly-out Animations */
+.flyIn {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
   transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
 }
 
-.stepCard.visible {
-  opacity: 1;
-  transform: translateY(0);
+.flyOut {
+  opacity: 0 !important;
+  transform: translateY(40px) !important;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
 }
 
+/* Step Number Styling */
 .stepNumber {
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 800;
-  color: #d6f5b0;
+  color: #99f468ff;
   opacity: 0.35;
-  z-index: 0;
-  pointer-events: none;
+  margin-bottom: 18px;
+  line-height: 1;
 }
 
+/* Step Title Styling */
 .stepTitle {
-  font-size: 1.35rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #222;
+  margin-top: 12px;
   margin-bottom: 10px;
-  margin-top: 48px;
-  z-index: 1;
 }
 
+/* Step Description Styling */
 .stepDesc {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   color: #444;
-  z-index: 1;
+  margin-top: 8px;
 }
 
+/* Responsive adjustments */
 @media (max-width: 900px) {
   .stepsGrid {
     grid-template-columns: 1fr 1fr;
     gap: 24px;
   }
+
+  .stepNumber {
+    font-size: 5rem;
+    margin-bottom: 14px;
+  }
+
+  .stepTitle {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 8px;
+  }
+
+  .stepDesc {
+    font-size: 1rem;
+    margin-top: 6px;
+  }
 }
+
 @media (max-width: 600px) {
   .stepsGrid {
     grid-template-columns: 1fr;
     gap: 18px;
   }
+
   .progressBar {
-    width: 95vw;
+    width: 70vw;
+  }
+
+  .stepNumber {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .stepTitle {
+    font-size: 1.2rem;
+    margin-top: 8px;
+    margin-bottom: 6px;
+  }
+  .stepCircle{
+    height: 25px;
+    width: 25px;
+  }
+
+  .stepDesc {
+    font-size: 0.95rem;
+    margin-top: 4px;
   }
 }
+
