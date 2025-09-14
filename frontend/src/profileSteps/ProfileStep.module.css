@@ -1,0 +1,44 @@
+.stepContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 0 0 0;
+  text-align: center;
+}
+.optionsGrid {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 40px;
+  flex-wrap: nowrap;
+  overflow-x: visible;
+}
+.optionCard {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+  border: 2.5px solid transparent;
+  padding: 24px 16px 18px 16px;
+  min-width: 140px;
+  max-width: 160px;
+  cursor: pointer;
+  transition: border 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.optionCard:hover, .optionCard.selected {
+  border: 2.5px solid #2d7ff9;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+.optionLabel {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 12px;
+  color: #222;
+}
+.optionSubtitle {
+  font-size: 0.95rem;
+  color: #444;
+  margin-top: 4px;
+}
