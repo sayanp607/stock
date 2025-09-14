@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth } from "./firebase";
+import { API_BASE_URL } from "./main";
 
 const SUPER_ADMIN_EMAIL = "sayanp607@gmail.com";
 
@@ -18,7 +19,7 @@ const SuperAdminPanel = () => {
 
   useEffect(() => {
     if (currentUser && currentUser.email === SUPER_ADMIN_EMAIL) {
-      fetch("http://localhost:5000/api/auth/users")
+      fetch(`${API_BASE_URL}/api/auth/users`)
         .then((res) => res.json())
         .then((data) => {
           setUsers(data.users || []);
@@ -35,7 +36,7 @@ const SuperAdminPanel = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/update-user-role",
+        `${API_BASE_URL}/api/auth/update-user-role`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -50,7 +51,7 @@ const SuperAdminPanel = () => {
       if (!data.success) throw new Error(data.error || "Failed to update role");
       alert("Role updated!");
       // Refresh user list
-      fetch("http://localhost:5000/api/users")
+      fetch(`${API_BASE_URL}/api/users`)
         .then((res) => res.json())
         .then((data) => {
           setUsers(data.users || []);

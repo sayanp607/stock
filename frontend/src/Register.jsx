@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, provider } from "./firebase";
 import { signInWithPopup } from "firebase/auth";
 import styles from "./Register.module.css";
+import { API_BASE_URL } from "./main";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Register = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       // Send user info to backend for user registration
-      await fetch("http://localhost:5000/api/auth/register-user", {
+      await fetch(`${API_BASE_URL}/api/auth/register-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

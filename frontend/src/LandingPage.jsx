@@ -9,6 +9,7 @@ import HeroSection from "./HeroSection";
 import FAQSection from "./FAQSection";
 import ContactUsSection from "./ContactUsSection";
 import Header from "./Header";
+import { API_BASE_URL } from "./main";
 
 const LandingPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,7 +34,7 @@ const LandingPage = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       window.localStorage.setItem("uid", user.uid); // Store UID for later use
-      await fetch("http://localhost:5000/api/auth/register-user", {
+      await fetch(`${API_BASE_URL}/api/auth/register-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
