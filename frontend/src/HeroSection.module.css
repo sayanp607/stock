@@ -222,15 +222,16 @@
 
   .heroTagline,
   .heroTitle,
-  .heroDesc,
-  .heroBtn {
+  .heroDesc {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
-    max-width: 400px; /* Optional max width */
+    width: 90%;
+    max-width: 250px; /* Optional max width */
   }
-
+.heroBtn{
+  width: 70%;
+}
   .heroTitle {
     font-size: 1.75rem;
   }

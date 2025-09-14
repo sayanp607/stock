@@ -34,15 +34,13 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
     else scrollToSection(section);
   };
 
-  // New handler for Register button
   const handleRegister = () => {
     closeMenu();
     setTimeout(() => {
       onRegisterClick();
-    }, 200); // slight delay to ensure menu closes first
+    }, 200);
   };
 
-  // New handler for Logout button
   const handleLogout = () => {
     closeMenu();
     setTimeout(() => {
@@ -55,7 +53,7 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
       <header className={styles.header}>
         <div className={styles.logo} onClick={() => scrollToSection("top")}>
           <img
-            src="/logo.jpg" // replace with your logo path or URL
+            src="/logo.jpg"
             alt="BearTron Logo"
             className={styles.logoImg}
           />
@@ -63,24 +61,31 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
         </div>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ""}`}>
-          <button className={styles.navLink} onClick={() => handleLinkClick("home")}>
+          <button
+            className={styles.navLink}
+            onClick={() => handleLinkClick("home")}
+          >
             Home
           </button>
-          <button className={styles.navLink} onClick={() => handleLinkClick("journey")}>
+          <button
+            className={styles.navLink}
+            onClick={() => handleLinkClick("journey")}
+          >
             Journey
           </button>
-          <button className={styles.navLink} onClick={() => handleLinkClick("faq")}>
+          <button
+            className={styles.navLink}
+            onClick={() => handleLinkClick("faq")}
+          >
             FAQ
           </button>
-          <button className={styles.navLink} onClick={() => handleLinkClick("contact")}>
+          <button
+            className={styles.navLink}
+            onClick={() => handleLinkClick("contact")}
+          >
             Contact
           </button>
 
-          {!currentUser && (
-            <button className={styles.navBtn} onClick={handleRegister}>
-              Register
-            </button>
-          )}
           {currentUser && (
             <button className={styles.navBtn} onClick={handleLogout}>
               Logout
@@ -93,6 +98,16 @@ const Header = ({ currentUser, onLogout, onRegisterClick }) => {
           <div className={styles.bar}></div>
           <div className={styles.bar}></div>
         </div>
+
+        {/* Mobile Register Button */}
+        {!currentUser && (
+          <button
+            className={styles.mobileRegisterBtn}
+            onClick={handleRegister}
+          >
+            Register
+          </button>
+        )}
 
         {isMenuOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
       </header>

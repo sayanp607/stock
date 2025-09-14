@@ -11,18 +11,14 @@
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 1.8rem;
+  margin-left: -20px !important;
   font-weight: 700;
   color: #fff;
   cursor: pointer;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  cursor: pointer;
-  gap: 12px;
 }
 
 .logoImg {
@@ -82,10 +78,23 @@
   border-radius: 2px;
 }
 
+/* Mobile Register Button */
+.mobileRegisterBtn {
+padding: 8px 16px; 
+border-radius: 8px;
+ border: none;
+  background: #fff;
+   color: #2563eb; 
+   font-weight: 600; 
+   cursor: pointer; 
+   transition: 0.3s;
+}
+
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
   .hamburger {
     display: flex;
+    margin-top: -20px;
   }
 
   .nav {
@@ -127,13 +136,24 @@
     color: #ff7f50;
   }
 
-  /* Override navBtn styling for mobile to ensure contrast */
-  .navBtn {
+  /* Mobile Register Button Styling */
+  .mobileRegisterBtn {
+    display: block;
+    position: absolute;
+    top: 58px; /* slightly under the hamburger */
+    right: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
     background: #fff;
     color: #ff7f50;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 3100;
   }
 
-  .navBtn:hover {
+  .mobileRegisterBtn:hover {
     background: #ffe5d0;
   }
 }
@@ -150,14 +170,19 @@
   border-radius: 12px;
   font-weight: 600;
   font-size: 1.1rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   z-index: 3500;
   text-align: center;
   animation: slideDown 0.5s ease-out;
 }
 
 @keyframes slideDown {
-  0% { transform: translate(-50%, -50px); opacity: 0; }
-  100% { transform: translate(-50%, 0); opacity: 1; }
+  0% {
+    transform: translate(-50%, -50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
-
