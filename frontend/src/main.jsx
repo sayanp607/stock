@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 // config.js
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://stock-u3sm.onrender.com";
+export const API_BASE_URL = "https://stock-u3sm.onrender.com";
 
 
 createRoot(document.getElementById('root')).render(
