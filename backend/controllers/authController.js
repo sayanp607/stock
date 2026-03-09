@@ -1,5 +1,4 @@
-const pool = require('../config/db');
-const { createUser, findUserByUid, createAdmin, updateUserRole } = require('../models/user');
+const { User, createUser, findUserByUid, updateUserRole } = require('../models/user');
 
 // List of allowed admin emails
 const allowedAdminEmails = [
@@ -12,9 +11,9 @@ const allowedAdminEmails = [
 exports.registerUser = async (req, res) => {
   const { uid, email, name } = req.body;
   try {
-    let user = await findUserByUid(pool, uid);
+    let user = await findUserByUid(uid);
     if (!user) {
-      user = await createUser(pool, { uid, email, name });
+      user = await createUser({ uid, email, name });
     }
     res.json({ success: true, user });
   } catch (err) {
@@ -26,14 +25,19 @@ exports.registerUser = async (req, res) => {
 exports.registerAdmin = async (req, res) => {
   const { uid, email, name } = req.body;
   try {
-    let user = await findUserByUid(pool, uid);
+    let user = await findUserByUid(uid);
     if (!user) {
-      user = await createAdmin(pool, { uid, email, name }, allowedAdminEmails);
-    } else if (user.identity !== 'admin') {
-      // If user exists but not admin, update identity if allowed
       if (allowedAdminEmails.includes(email)) {
-        await pool.query('UPDATE users SET identity = $1 WHERE uid = $2', ['admin', uid]);
-        user.identity = 'admin';
+        user = await createUser({ uid, email, name });
+        user.role = 'admin';
+        await user.save();
+      } else {
+        throw new Error('Email not allowed for admin registration');
+      }
+    } else if (user.role !== 'admin' && user.role !== 'super_admin') {
+      if (allowedAdminEmails.includes(email)) {
+        user.role = 'admin';
+        await user.save();
       } else {
         throw new Error('Email not allowed for admin registration');
       }
@@ -48,7 +52,7 @@ exports.registerAdmin = async (req, res) => {
 exports.updateUserRole = async (req, res) => {
   const { targetUid, newRole, requesterEmail } = req.body;
   try {
-    const result = await updateUserRole(pool, targetUid, newRole, requesterEmail);
+    const result = await updateUserRole(targetUid, newRole, requesterEmail);
     res.json(result);
   } catch (err) {
     res.status(403).json({ success: false, error: err.message });
@@ -58,8 +62,8 @@ exports.updateUserRole = async (req, res) => {
 // Get all users (for super admin panel)
 exports.getAllUsers = async (req, res) => {
   try {
-    const result = await pool.query('SELECT uid, email, name, role FROM users');
-    res.json({ users: result.rows });
+    const users = await User.find({}, 'uid email name role');
+    res.json({ users });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

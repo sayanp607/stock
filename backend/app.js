@@ -2,11 +2,17 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+const connectDB = require('./config/db');
+
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const contactRoutes = require('./routes/contact');
 
 const app = express();
+
+// Connect to MongoDB
+connectDB();
+
 app.use(cors());
 app.use(express.json());
 
